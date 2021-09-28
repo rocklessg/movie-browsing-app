@@ -11,14 +11,18 @@ class Movies extends Component {
     this.setState({ movies });
   };
   render() {
+    // Using destructuring
+    const { length: count } = this.state.movies;
+    if (count === 0) {
+      return <p>There is no movie in the database.</p>;
+    }
     return (
-      <>
-        <h1>Movie Tables</h1>
+      <React.Fragment>
+        <p>Showing {count} movies in the database.</p>
         <table className="table">
           <thead>
             <tr>
               <th>Title</th>
-              <th>Movie_ID</th>
               <th>Genre</th>
               <th>Stock</th>
               <th>Rate</th>
@@ -29,7 +33,6 @@ class Movies extends Component {
             {this.state.movies.map((movie) => (
               <tr key={movie._id}>
                 <td>{movie.title}</td>
-                <td>{movie._id}</td>
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
@@ -45,7 +48,7 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
-      </>
+      </React.Fragment>
     );
   }
 }
